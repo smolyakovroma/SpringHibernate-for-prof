@@ -11,19 +11,19 @@ public class SpringHibernateSample {
         ctx.refresh();
 
         ContactDao contactDao = ctx.getBean("contactDao", ContactDao.class);
-        System.out.println(contactDao.findAll());
-//        listContact(contactDao.findAll());
+//        System.out.println(contactDao.findAll());
+        listContact(contactDao.findAll());
 
     }
 
     private static void listContact(List<Contact> contacts) {
         for (Contact contact : contacts) {
             System.out.println(contact);
-            if(contact.getContactTelDetails()!=null){
-                for (ContactTelDetail contactTelDetail : contact.getContactTelDetails()) {
-                    System.out.println("- "+contactTelDetail);
-                }
-            }
+//            if(contact.getContactTelDetails()!=null){
+//                for (ContactTelDetail contactTelDetail : contact.getContactTelDetails()) {
+//                    System.out.println("- "+contactTelDetail);
+//                }
+//            }
         }
     }
 }
