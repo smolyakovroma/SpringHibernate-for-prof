@@ -1,4 +1,4 @@
-package ch7;
+package ch8;
 
 import javax.persistence.*;
 import java.io.Serializable;

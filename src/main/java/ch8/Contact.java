@@ -1,4 +1,4 @@
-package ch7;
+package ch8;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -6,15 +6,17 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-//for jdbc
-//import java.sql.Date;
 
 @Entity
 @Table(name = "contact")
 @NamedQueries({
+@NamedQuery(name = "Contact.findAll", query = "select c from Contact c"),
 @NamedQuery(name = "Contact.findAllWithDetail", query = "select distinct c from Contact c left join fetch c.contactTelDetails t left join fetch c.hobbies h"),
-        @NamedQuery(name="Contact.findById",  query="select distinct c from Contact c left join fetch c.contactTelDetails t left join fetch c.hobbies h where c.id = :id")
+@NamedQuery(name="Contact.findById",  query="select distinct c from Contact c left join fetch c.contactTelDetails t left join fetch c.hobbies h where c.id = :id")
 })
+@SqlResultSetMapping(
+        name="contactResult",
+        entities=@EntityResult(entityClass=Contact.class))
 //left join fetch c.contactTelDetails t left join fetch c.hobbies h
 public class Contact implements Serializable {
     private static final long serialVersionUID = -7690179264720851189L;

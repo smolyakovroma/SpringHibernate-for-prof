@@ -32,27 +32,32 @@ public class ContactDaoImpl implements ContactDao {
     @Transactional(readOnly = true)
     public List<Contact> findAll() {
         return sessionFactory.getCurrentSession().createQuery("from Contact c").list();
+//            return null;
+    }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<Contact> findAllWithDetail() {
+        return sessionFactory.getCurrentSession().getNamedQuery("Contact.findAllWithDetail").list();
 //        return null;
     }
 
-    @Override
-    public List<Contact> findAllWithDetail() {
-        return null;
-    }
-
+    @Transactional(readOnly = true)
     @Override
     public Contact findById(Long id) {
-        return null;
+        return (Contact) sessionFactory.getCurrentSession().getNamedQuery("Contact.findById").setParameter("id", id).uniqueResult();
     }
 
     @Override
     public Contact save(Contact contact) {
-        return null;
+        sessionFactory.getCurrentSession().saveOrUpdate(contact);
+        LOG.info("Contact saved with id: "+contact.getId());
+        return contact;
     }
 
     @Override
     public void delete(Contact contact) {
-
+        sessionFactory.getCurrentSession().delete(contact);
+        LOG.info("Contact deleted with id: "+contact.getId());
     }
 }
